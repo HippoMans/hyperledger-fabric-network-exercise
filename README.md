@@ -1,9 +1,8 @@
 # hyperledger-fabric-network-exercise
 hyperledger-fabric network composed of 10 server computers
 
-
-
-
+  
+  
 # [hyperledger-fabric network screen] 
 ![image](https://user-images.githubusercontent.com/24874209/76379022-50313a80-6392-11ea-87b1-7ec1d4b536a0.png)
 
