@@ -1,6 +1,5 @@
 [hyperledger-fabric network screen] 
-![하이퍼레저 네트워크 전체 구성도](https://user-images.githubusercontent.com/24874209/76378696-6985b700-6391-11ea-9352-8b9161a4a0eb.jpg)
-
+![image](https://user-images.githubusercontent.com/24874209/76379022-50313a80-6392-11ea-87b1-7ec1d4b536a0.png)
 [network ip configuration]
 
 peer0, admin-salesorg : 10.1.1.11
