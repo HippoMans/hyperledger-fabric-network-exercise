@@ -1,0 +1,85 @@
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererOrgMSP
+        MSPDir: crypto-config/ordererOrganizations/ordererorg0/msp/
+
+    - &SalesOrg
+        Name: SalesOrgMSP
+        ID: SalesOrgMSP
+        MSPDir: crypto-config/peerOrganizations/salesorg/msp/
+        AnchorPeers:
+            - Host: peer0
+              Port: 7051 
+
+    - &MerchantOrg
+        Name: MerchantOrgMSP
+        ID: MerchantOrgMSP
+        MSPDir: crypto-config/peerOrganizations/merchantorg/msp/
+        AnchorPeers:
+            - Host: peer2
+              Port: 7051
+
+    - &CustomerOrg
+        Name: CustomerOrgMSP
+        ID: CustomerOrgMSP
+        MSPDir: crypto-config/peerOrganizations/customerorg/msp/
+        AnchorPeers:
+            - Host: peer4
+              Port: 7051
+
+Orderer: &OrdererDefaults
+    OrdererType: kafka
+    Addresses:
+        - orderer0:7050
+    BatchTimeout: 1s
+    BatchSize:
+        MaxMessageCount: 30
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Kafka:
+        Brokers:
+            - kafka-zookeeper:9092
+    Organizations:
+
+Application: &ApplicationDefaults
+    Organizations:
+
+Profiles:
+
+    ThreeOrgsOrdererGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *SalesOrg
+                    - *MerchantOrg
+                    - *CustomerOrg
+
+    BasicChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *SalesOrg
+                - *MerchantOrg
+                - *CustomerOrg
+
+    MerchantChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *SalesOrg
+                - *MerchantOrg
+
+    CustomerChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *SalesOrg
+                - *CustomerOrg
